@@ -133,6 +133,16 @@ router.post('/addtofavorate',function (req,res) {
   
 })
 
+router.post("/deletefavorate",function(req,res) {
+  userHelpers.deletefavorate((req.body),(response)=>{
+    if(response){
+      res.status(200).json({status:true})
+    }else{
+      res.status(200).json(false)
+    }
+  })
+})
+
 router.post("/userfavorate",function(req,res){
   userHelpers.findfavorate((req.body.userid),(response)=>{
     if(response){

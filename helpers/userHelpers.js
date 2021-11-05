@@ -52,8 +52,8 @@ module.exports = {
     addtofavorate: (data, callback) => {
         db.get()
             .collection(collections.user_collections)
-            .updateOne({ _id:objectId(data.userid) },{
-                $addToSet: { favorate:{movieid:data.moviedetails.id,moviedata:data.moviedetails}}
+            .updateOne({ _id: objectId(data.userid) }, {
+                $addToSet: { favorate: { movieid: data.moviedetails.id, moviedata: data.moviedetails } }
             })
             .then((result) => {
                 callback(result);
@@ -63,10 +63,20 @@ module.exports = {
     findfavorate: (userid, callback) => {
         db.get()
             .collection(collections.user_collections)
-            .findOne({ _id:objectId(userid) })
+            .findOne({ _id: objectId(userid) })
             .then((result) => {
                 callback(result.favorate);
             });
+    },
+
+    deletefavorate: (ids, callback) => {      
+            db.get().collection(collections.user_collections).update({ _id: objectId(ids.userId) }, {
+                $pull: { favorate: { movieid: ids.movieId } }
+            }, false, true).then((result)=>{
+                console.log(result);
+               callback(result)
+            })
+     
     }
 
 };

@@ -68,15 +68,14 @@ module.exports = {
         // });
     },
 
-    popularMovies:async (callback)=>{
-        var response = await db
-        .get()
+    popularMovies:async (callback)=>{       
+        var response = await db.get()
         .collection(collections.popularmovie_collections)
         .find().toArray();
         callback(response);  
-    },
+    }, 
 
-    latestMovies:async (callback)=>{
+    latestMovies:async (callback)=>{ 
         var response = await db
         .get()
         .collection(collections.latestmovie_collections)
